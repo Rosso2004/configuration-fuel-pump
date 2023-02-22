@@ -1,4 +1,5 @@
 function progress {
+    echo -ne "\r\e[K"
     local w=80 p=$1;  shift
     printf -v progressbar "%0.s#" $(seq 1 $(($p*$w/100)))
     printf -v spaces "%0.s " $(seq $((($p*$w/100)+1)) $w)
