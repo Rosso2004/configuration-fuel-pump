@@ -2,15 +2,20 @@
 
 function progress {
     local w=80 p=$1;  shift
-    printf -v dots "%*s" "$(( $p*$w/100 ))" ""; dots=${dots// /.};
-    printf "\r\e[K|%-*s| %3d %% %s" "$w" "$dots" "$p" "$*";
+    printf -v progressbar "%0.s#" $(seq 1 $(($p*$w/100)))
+    printf -v spaces "%0.s " $(seq $((($p*$w/100)+1)) $w)
+    printf "\r\e[K|%s%s| %3d %% %s" "$progressbar" "$spaces" "$p" "$*";
 }
 
-read -p "Desideri eseguire l'aggiornamento del sistema? [Y/n]" choice
+read -p "Vuoi eseguire l'aggiornamento del sistema? [S/n]" choice
 case "$choice" in 
-  y|Y ) 
+  s|S ) 
     echo "Aggiornamento dei pacchetti di sistema..."
-    sudo apt-get update && sudo apt-get upgrade > /dev/null 2>&1
+    sudo apt-get update && sudo apt-get upgrade > /dev/null 2>&1 &
+    while [ -n "$(jobs | grep 'Running')" ]; do
+        sleep 1
+        progress $(awk '/progress [0-9]+/{print $2}' <(tail -n1 /var/log/apt/term.log))
+    done
     progress 25
     ;;
   n|N )
@@ -27,7 +32,7 @@ sudo apt-get install plymouth -y > /dev/null 2>&1
 sudo apt-get install plymouth-themes -y > /dev/null 2>&1
 progress 50
 
-echo "Installazione di RPD-Plym-Splash..."
+echo "Installazione di RPD-Plym-Splash per abilitare/disabilitare lo splash screen dal raspi-config..."
 sudo apt -y install rpd-plym-splash > /dev/null 2>&1
 progress 75
 
@@ -36,6 +41,6 @@ sudo rm -f /usr/share/plymouth/themes/spinner/background-tile.png > /dev/null 2>
 sudo mv background-tile.png /usr/share/plymouth/themes/spinner > /dev/null 2>&1
 sudo plymouth-set-default-theme -R spinner > /dev/null 2>&1
 progress 100
-echo -e "\nConfigurazione del bootloader eseguita con successo!"
+echo -e "\nEseguito con successo!"
 
 sudo reboot
