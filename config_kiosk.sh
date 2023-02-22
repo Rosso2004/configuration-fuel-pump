@@ -11,7 +11,6 @@ echo "xset s off" >> /home/$USER/.xsession
 echo "xset s noblank" >> /home/$USER/.xsession
 echo "while true; do" >> /home/$USER/.xsession
 echo "     chromium-browser --kiosk --start-fullscreen --window-size=1920,1080 $sito" >> /home/$USER/.xsession
-echo "     sleep 5s" >> /home/$USER/.xsession
 echo "done" >> /home/$USER/.xsession
 
 chmod +x /home/$USER/.xsession
