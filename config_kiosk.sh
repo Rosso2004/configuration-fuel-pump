@@ -11,12 +11,12 @@ count_lines() {
     echo $i
     sleep 0.05
   done
-  sudo apt-get install chromium-browser -y
+  sudo apt-get install chromium-browser -y 2>/dev/null
   for i in {11..50}; do
     echo $i
     sleep 0.05
   done
-  sudo apt-get install xorg -y
+  sudo apt-get install xorg -y 2>/dev/null
   for i in {51..100}; do
     echo $i
     sleep 0.05
