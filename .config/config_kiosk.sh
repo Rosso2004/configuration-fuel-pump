@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if whiptail --yesno "This option automatically starts a kiosk after system boot. Are you sure you want to proceed with the configuration?" 8 78; then
+if whiptail --title "WARNING" --yesno "This option automatically starts a kiosk after system boot. Are you sure you want to proceed with the configuration?" 20 80; then
   count_lines() {
     lines=$(wc -l < "${1:-/dev/stdin}")
     echo "$lines"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if whiptail --yesno "This option creates a startup screen with a custom image, make sure you have placed in the configuration-fuel-pump folder an image called background-tile.png with resolution 1920x1080. Are you sure you want to proceed with the configuration?" 8 78; then
+if whiptail --title "WARNING" --yesno "This option creates a startup screen with a custom image, make sure you have placed in the configuration-fuel-pump folder an image called background-tile.png with resolution 1920x1080. Are you sure you want to proceed with the configuration?" 20 80; then
   count_lines() {
     lines=$(wc -l < "${1:-/dev/stdin}")
     echo "$lines"
