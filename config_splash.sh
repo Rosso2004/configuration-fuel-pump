@@ -19,6 +19,6 @@ sudo apt-get install plymouth-themes -y
 sudo apt -y install rpd-plym-splash
 
 sudo rm -f /usr/share/plymouth/themes/spinner/background-tile.png
-sudo mv background-tile.png /usr/share/plymouth/themes/spinner
+sudo cp background-tile.png /usr/share/plymouth/themes/spinner
 sudo plymouth-set-default-theme -R spinner
 sudo reboot
