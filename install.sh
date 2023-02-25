@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo chmod +x .config/config_splash.sh
-sudo chmod +x .config/config_kiosk.sh
+sudo chmod +x config/config_splash.sh
+sudo chmod +x config/config_kiosk.sh
 
 options=(1 "Install the custom bootloader"
          2 "Configure the kiosk on startup"
@@ -13,11 +13,11 @@ while true; do
     if [ $? -eq 0 ]; then
         case $option in
             1)
-                sh .config/config_splash.sh
+                sh config/config_splash.sh
                 ;;
             2)
 
-                sh .config/config_kiosk.sh
+                sh config/config_kiosk.sh
                 ;;
             3)
                 sudo reboot
