@@ -6,6 +6,7 @@ count_lines() {
 }
 
 {
+    sudo apt update
     for i in {1..10}; do
       echo $i
       sleep 0.05
@@ -31,26 +32,26 @@ while [[ -z "$sito" ]]; do
 done
 
 {
-    for i in {1..10}; do
-      echo $i
-      sleep 0.05
-    done
-    echo "#!/bin/sh" > /home/$USER/.xsession
-    echo "xset -dpms" >> /home/$USER/.xsession
-    echo "xset s off" >> /home/$USER/.xsession
-    echo "xset s noblank" >> /home/$USER/.xsession
-    echo "while true; do" >> /home/$USER/.xsession
-    echo "     chromium-browser --kiosk --start-fullscreen --window-size=1920,1080 $sito" >> /home/$USER/.xsession
-    echo "done" >> /home/$USER/.xsession
-    for i in {11..50}; do
-      echo $i
-      sleep 0.05
-    done
-    chmod +x /home/$USER/.xsession
-    for i in {51..100}; do
-      echo $i
-      sleep 0.05
-    done
+  for i in {1..10}; do
+    echo $i
+    sleep 0.05
+  done
+  echo "#!/bin/sh" > /home/$USER/.xsession
+  echo "xset -dpms" >> /home/$USER/.xsession
+  echo "xset s off" >> /home/$USER/.xsession
+  echo "xset s noblank" >> /home/$USER/.xsession
+  echo "while true; do" >> /home/$USER/.xsession
+  echo "     chromium-browser --kiosk --start-fullscreen --window-size=1920,1080 $sito" >> /home/$USER/.xsession
+  echo "done" >> /home/$USER/.xsession
+  for i in {11..50}; do
+    echo $i
+    sleep 0.05
+  done
+  chmod +x /home/$USER/.xsession
+  for i in {51..100}; do
+    echo $i
+    sleep 0.05
+  done
 } | whiptail --title "Creating .xsession" --gauge "Creating .xsession file, please wait..." 8 78 0
 
 {
